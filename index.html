@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#09090d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="LokiTest">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>LokiTest</title>
+<style>
+:root{--bg:#09090d;--panel:#13131a;--panel2:#1a151b;--red:#ff304f;--red2:#b50f31;--text:#f7f4f6;--muted:#9a929b;--line:#33202a;--green:#48d597}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#3a0b1b 0,transparent 38%),var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+button,input{font:inherit}button{cursor:pointer}.shell{max-width:520px;margin:auto;min-height:100vh;padding:env(safe-area-inset-top) 18px calc(92px + env(safe-area-inset-bottom))}
+header{display:flex;align-items:center;justify-content:space-between;padding:22px 2px 18px}.brand{font-weight:900;letter-spacing:2px;font-size:21px}.brand span{color:var(--red);text-shadow:0 0 18px #ff304f66}.avatar{width:40px;height:40px;border-radius:14px;background:#2a101a;border:1px solid #743044;color:#ff6a80;font-weight:800}
+.eyebrow{color:var(--red);font-size:11px;font-weight:800;letter-spacing:2px}.hero{padding:22px;border:1px solid #642337;border-radius:23px;background:linear-gradient(135deg,#28101b,#151118 70%);box-shadow:0 12px 40px #0008;margin:6px 0 22px}.hero h1{font-size:27px;margin:9px 0}.hero p{color:#c3b7bf;font-size:14px;line-height:1.5;margin:0 0 18px}.status{display:inline-flex;align-items:center;gap:7px;color:var(--green);font-size:11px;font-weight:800}.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
+.primary{border:0;background:linear-gradient(100deg,var(--red2),var(--red));color:white;border-radius:13px;padding:13px 16px;font-weight:800;box-shadow:0 6px 20px #ff304f30}.ghost{background:#21151d;border:1px solid #51303c;color:#fff;border-radius:12px;padding:11px 14px;font-weight:700}
+.section-title{display:flex;align-items:center;justify-content:space-between;margin:20px 2px 12px}.section-title h2{font-size:16px;margin:0}.muted{color:var(--muted);font-size:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.tile,.card{background:linear-gradient(145deg,#19171e,#111117);border:1px solid var(--line);border-radius:17px;padding:16px}.tile .ico{font-size:22px}.tile strong{display:block;margin:12px 0 4px;font-size:14px}.tile small{color:var(--muted);font-size:11px}.metric{font-size:25px;font-weight:900;margin-top:8px}
+nav{position:fixed;bottom:0;left:0;right:0;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:#0d0c12ed;backdrop-filter:blur(18px);border-top:1px solid #38202a;display:flex;justify-content:center;z-index:5}.navin{width:min(520px,100%);display:flex;justify-content:space-around}.navbtn{background:none;border:0;color:#8d838d;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10px;padding:5px 12px}.navbtn b{font-size:19px}.navbtn.active{color:var(--red)}
+.view{display:none}.view.active{display:block}.field{width:100%;background:#0d0c12;border:1px solid #45303a;border-radius:12px;color:white;padding:14px;margin:7px 0 13px;outline:none}.field:focus{border-color:var(--red)}label{font-size:12px;color:#c9bdc5}.row{display:flex;gap:10px;align-items:center}.row>*{flex:1}
+.chatbox{height:48vh;min-height:280px;overflow:auto;display:flex;flex-direction:column;gap:10px;padding:12px;background:#0d0c12;border:1px solid var(--line);border-radius:16px;margin:12px 0}.bubble{max-width:85%;padding:11px 13px;border-radius:14px;background:#211820;color:#eee;font-size:13px;line-height:1.45}.bubble.me{align-self:flex-end;background:#6f1830}.bubble.bot{align-self:flex-start}.chatform{display:flex;gap:8px}.chatform input{flex:1;min-width:0}
+.listitem{display:flex;align-items:center;justify-content:space-between;padding:15px 2px;border-bottom:1px solid #2b2028}.switch{accent-color:var(--red);width:20px;height:20px}
+.login{max-width:420px;margin:9vh auto;padding:22px}.login .hero{margin-bottom:20px}.hidden{display:none!important}.toast{position:fixed;top:18px;left:50%;transform:translateX(-50%);background:#25131c;border:1px solid #803149;padding:11px 16px;border-radius:12px;font-size:13px;z-index:20;box-shadow:0 10px 30px #0009}
+footer{text-align:center;color:#655c65;font-size:10px;padding:25px 0}
+</style>
+</head>
+<body>
+<div id="login" class="login">
+ <div class="brand">LOKI<span>TEST</span></div>
+ <div class="hero" style="margin-top:25px"><div class="eyebrow">ACCÈS PRIVÉ · V1.0</div><h1>Bienvenue dans<br>LokiTest.</h1><p>Ton espace personnel, dans une interface sombre aux accents rouge néon.</p><div class="status"><i class="dot"></i> SYSTÈME PRÊT</div></div>
+ <label for="username">Nom d'utilisateur</label><input id="username" class="field" placeholder="Ex. Tony" autocomplete="nickname">
+ <label for="password">Mot de passe (démo)</label><input id="password" class="field" type="password" placeholder="Au choix pour la démo">
+ <button class="primary" style="width:100%" onclick="login()">Entrer dans LokiTest →</button>
+ <p class="muted" style="text-align:center;margin-top:14px">Prototype local · aucun compte réel n'est créé.</p>
+</div>
+<div id="app" class="shell hidden">
+ <header><div class="brand">LOKI<span>TEST</span></div><button class="avatar" onclick="show('profile')">L</button></header>
+ <main>
+  <section id="dashboard" class="view active">
+   <div class="eyebrow">TABLEAU DE BORD / 01</div>
+   <div class="hero"><div class="status"><i class="dot"></i> TOUT FONCTIONNE</div><h1 id="hello">Salut !</h1><p>Bienvenue sur ton espace LokiTest. Voici ton centre de contrôle.</p><button class="primary" onclick="show('chat')">Ouvrir LokiBot ↗</button></div>
+   <div class="grid">
+    <div class="tile"><div class="ico">⚡</div><strong>Activité</strong><small>Ton espace est actif</small><div class="metric">100%</div></div>
+    <div class="tile"><div class="ico">💬</div><strong>Messages</strong><small>Conversation de démo</small><div class="metric" id="msgcount">0</div></div>
+    <div class="tile"><div class="ico">🔔</div><strong>Notifications</strong><small>Centre personnel</small><div class="metric" id="notifcount">2</div></div>
+    <div class="tile"><div class="ico">🛡️</div><strong>Sécurité</strong><small>Session locale</small><div class="metric" style="font-size:18px;color:var(--green)">ACTIVE</div></div>
+   </div>
+   <div class="section-title"><h2>Accès rapides</h2><span class="muted">LOKITEST</span></div>
+   <div class="grid">
+    <button class="tile" onclick="show('profile')" style="text-align:left;color:white"><div class="ico">👤</div><strong>Mon profil</strong><small>Gérer tes informations</small></button>
+    <button class="tile" onclick="show('settings')" style="text-align:left;color:white"><div class="ico">⚙️</div><strong>Paramètres</strong><small>Personnaliser l'app</small></button>
+   </div>
+  </section>
+  <section id="chat" class="view">
+   <div class="eyebrow">MESSAGERIE / 02</div><div class="section-title"><h2>Chat LokiBot</h2><span class="status"><i class="dot"></i> EN LIGNE</span></div>
+   <div id="chatbox" class="chatbox"><div class="bubble bot">Salut ! Je suis LokiBot, ton assistant de démonstration. Que veux-tu faire ?</div></div>
+   <form class="chatform" onsubmit="sendMsg(event)"><input id="chatinput" class="field" style="margin:0" placeholder="Écris un message…"><button class="primary">Envoyer</button></form>
+   <p class="muted">Chat local simulé : les messages ne sont pas envoyés à un serveur.</p>
+  </section>
+  <section id="notifications" class="view">
+   <div class="eyebrow">CENTRE D'ALERTES / 03</div><div class="section-title"><h2>Notifications</h2><button class="ghost" onclick="clearNotifs()">Tout lire</button></div>
+   <div id="notifs" class="card"><div class="listitem"><span>🔴 Bienvenue sur LokiTest</span><small class="muted">Maintenant</small></div><div class="listitem"><span>⚡ Ton tableau de bord est prêt</span><small class="muted">Maintenant</small></div></div>
+   <div class="card" style="margin-top:12px"><strong>Notifications iPhone</strong><p class="muted">Les notifications push nécessitent un serveur et une configuration supplémentaire. Cette démo affiche les alertes dans l'application.</p><button class="ghost" onclick="toast('Les notifications push seront ajoutées dans une prochaine version.')">En savoir plus</button></div>
+  </section>
+  <section id="profile" class="view">
+   <div class="eyebrow">COMPTE / 04</div><div class="section-title"><h2>Mon profil</h2></div>
+   <div class="card"><div style="display:flex;align-items:center;gap:14px"><div class="avatar" style="display:grid;place-items:center;width:58px;height:58px;font-size:22px" id="avatarLetter">L</div><div><strong id="profileName">Utilisateur</strong><div class="muted">Membre LokiTest</div></div></div></div>
+   <label>Nom affiché</label><input id="editname" class="field" placeholder="Ton nom">
+   <label>À propos</label><input id="bio" class="field" placeholder="Quelques mots sur toi">
+   <button class="primary" onclick="saveProfile()">Enregistrer le profil</button>
+  </section>
+  <section id="settings" class="view">
+   <div class="eyebrow">PERSONNALISATION / 05</div><div class="section-title"><h2>Paramètres</h2></div>
+   <div class="card">
+    <div class="listitem"><div><strong>Effets lumineux</strong><div class="muted">Accent rouge néon</div></div><input class="switch" type="checkbox" checked onchange="toast('Préférence enregistrée')"></div>
+    <div class="listitem"><div><strong>Notifications dans l'app</strong><div class="muted">Afficher les alertes</div></div><input class="switch" type="checkbox" checked></div>
+    <div class="listitem"><div><strong>Animations</strong><div class="muted">Transitions de l'interface</div></div><input class="switch" type="checkbox" checked></div>
+   </div>
+   <div class="card" style="margin-top:12px"><strong>Session</strong><p class="muted">Tes informations sont stockées uniquement dans le navigateur de cet appareil.</p><button class="ghost" onclick="logout()">Se déconnecter</button></div>
+  </section>
+ </main>
+ <footer>LOKITEST · VERSION 1.0 · PROTOTYPE</footer>
+</div>
+<nav id="nav" class="hidden"><div class="navin">
+ <button class="navbtn active" data-view="dashboard" onclick="show('dashboard')"><b>⌂</b>Accueil</button>
+ <button class="navbtn" data-view="chat" onclick="show('chat')"><b>▤</b>Chat</button>
+ <button class="navbtn" data-view="notifications" onclick="show('notifications')"><b>♧</b>Alertes</button>
+ <button class="navbtn" data-view="profile" onclick="show('profile')"><b>◉</b>Profil</button>
+ <button class="navbtn" data-view="settings" onclick="show('settings')"><b>⚙</b>Réglages</button>
+</div></nav>
+<div id="toast" class="toast hidden"></div>
+<script>
+const $=id=>document.getElementById(id);
+let messages=0, user=localStorage.getItem('lokiUser')||'';
+function toast(t){$('toast').textContent=t;$('toast').classList.remove('hidden');setTimeout(()=>$('toast').classList.add('hidden'),2300)}
+function login(){let n=$('username').value.trim();if(!n){toast('Entre un nom pour continuer');return}user=n;localStorage.setItem('lokiUser',user);$('login').classList.add('hidden');$('app').classList.remove('hidden');$('nav').classList.remove('hidden');updateProfile();show('dashboard')}
+function logout(){localStorage.removeItem('lokiUser');user='';$('app').classList.add('hidden');$('nav').classList.add('hidden');$('login').classList.remove('hidden')}
+function show(v){document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));$(v).classList.add('active');document.querySelectorAll('.navbtn').forEach(x=>x.classList.toggle('active',x.dataset.view===v));if(v==='profile')updateProfile();window.scrollTo(0,0)}
+function updateProfile(){let n=user||'Utilisateur';$('hello').textContent='Salut, '+n+' !';$('profileName').textContent=n;$('avatarLetter').textContent=n.charAt(0).toUpperCase();$('editname').value=n}
+function saveProfile(){let n=$('editname').value.trim();if(n){user=n;localStorage.setItem('lokiUser',user)}updateProfile();toast('Profil enregistré')}
+function sendMsg(e){e.preventDefault();let t=$('chatinput').value.trim();if(!t)return;addBubble(t,'me');$('chatinput').value='';messages++;$('msgcount').textContent=messages;setTimeout(()=>{let answer=/bonjour|salut|hello/i.test(t)?'Salut '+user+' ! Ravi de te retrouver.':/aide|help/i.test(t)?'Je peux te guider dans le tableau de bord, ton profil ou les paramètres.':'Message reçu ! LokiBot est en mode démonstration pour le moment.';addBubble(answer,'bot')},450)}
+function addBubble(t,c){let b=document.createElement('div');b.className='bubble '+c;b.textContent=t;$('chatbox').appendChild(b);$('chatbox').scrollTop=$('chatbox').scrollHeight}
+function clearNotifs(){$('notifs').innerHTML='<p class="muted">Tu es à jour. Aucune nouvelle notification.</p>';$('notifcount').textContent='0';toast('Notifications lues')}
+if(user){$('login').classList.add('hidden');$('app').classList.remove('hidden');$('nav').classList.remove('hidden');updateProfile()}
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
+</script>
+</body></html>
